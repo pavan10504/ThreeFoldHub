@@ -258,7 +258,7 @@ const Pricing = () => {
                                 <div className="flex flex-col gap-2">
                                     <label className="text-sm font-medium text-gray-600">Project Requirements</label>
                                     <textarea 
-                                        name="Project Requirements"
+                                        name="project_requirements"
                                         required
                                         rows={3}
                                         className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all resize-none"
