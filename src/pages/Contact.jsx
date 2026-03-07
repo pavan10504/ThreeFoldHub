@@ -30,7 +30,7 @@ const Contact = () => {
       } else {
         setError(true);
       }
-    } catch (err) {
+    } catch {
       setError(true);
     } finally {
       setIsSubmitting(false);
