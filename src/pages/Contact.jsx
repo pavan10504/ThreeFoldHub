@@ -74,7 +74,7 @@ const Contact = () => {
             </FadeUp>
           </div>
 
-          <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-black/5 shadow-xl shadow-black/[0.02]">
+          <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-black/5 shadow-xl shadow-black/2">
             <FadeUp delay={0.3}>
               <h3 className="text-2xl font-heading font-medium mb-8">Send us a message</h3>
               {isSubmitted ? (
@@ -104,7 +104,7 @@ const Contact = () => {
                       id="name" 
                       name="name"
                       required
-                      className="w-full bg-[var(--color-bg-base)] border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
+                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
                       placeholder="Name"
                     />
                   </div>
@@ -115,8 +115,19 @@ const Contact = () => {
                       id="email"
                       name="email" 
                       required
-                      className="w-full bg-[var(--color-bg-base)] border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
+                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
                       placeholder="example@email.com"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="phone" className="text-sm font-medium text-gray-600">Phone</label>
+                    <input 
+                      type="tel" 
+                      id="phone"
+                      name="phone" 
+                      required
+                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
+                      placeholder="+91 98765 43210"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -126,7 +137,7 @@ const Contact = () => {
                       name="message"
                       required
                       rows={4}
-                      className="w-full bg-[var(--color-bg-base)] border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all resize-none"
+                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all resize-none"
                       placeholder="Tell us about your business..."
                     />
                   </div>

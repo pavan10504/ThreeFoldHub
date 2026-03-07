@@ -26,7 +26,7 @@ const About = () => {
               </p>
             </FadeUp>
             <FadeUp delay={0.2}>
-              <div className="aspect-square bg-[var(--color-bg-base)] rounded-[3rem] relative overflow-hidden flex items-center justify-center p-12">
+              <div className="aspect-square bg-gray-100 rounded-[3rem] relative overflow-hidden flex items-center justify-center p-12">
                  <motion.div 
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}

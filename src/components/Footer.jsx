@@ -35,13 +35,23 @@ const Footer = () => {
             </ul>
           </div>
 
+          <div>
+            <h4 className="font-heading font-medium text-lg mb-6">FAQs</h4>
+            <ul className="flex flex-col gap-4 text-sm text-gray-500">
+              <li><Link to="/contact" className="hover:text-primary transition-colors leading-relaxed block">How long does a website take to build?</Link></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors leading-relaxed block">Do you provide domains?</Link></li>
+              <li><Link to="/pricing" className="hover:text-primary transition-colors leading-relaxed block">What is your pricing structure?</Link></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors leading-relaxed block">Can you redesign an old site?</Link></li>
+            </ul>
+          </div>
+
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-black/5 text-xs text-gray-400">
           <p>&copy; {currentYear} ThreeFoldHub. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

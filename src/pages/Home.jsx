@@ -83,27 +83,117 @@ const Home = () => {
           </div>
 
           <div className="hidden md:flex md:w-1/2 justify-center relative">
-            <FadeUp delay={0.3} className="relative w-full max-w-lg aspect-square">
-              {/* Modern Abstract Web Design Illustration */}
-              <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-2xl hover:scale-105 transition-transform duration-700">
-                <rect x="50" y="50" width="300" height="300" rx="40" fill="#f8f7f4" stroke="#e5e5e5" strokeWidth="2"/>
-                <rect x="50" y="50" width="300" height="60" rx="40" fill="#111111"/>
-                <rect x="50" y="50" width="300" height="60" fill="#111111" clipPath="inset(0 0 50% 0)"/>
-                <circle cx="80" cy="80" r="6" fill="#ff5f56"/>
-                <circle cx="100" cy="80" r="6" fill="#ffbd2e"/>
-                <circle cx="120" cy="80" r="6" fill="#27c93f"/>
+            <FadeUp delay={0.3} className="relative w-full max-w-lg aspect-square flex items-center justify-center">
+              {/* Premium Layered UI Mockup */}
+              <div className="relative w-full h-[85%] mx-auto style={{ perspective: '1200px' }}">
+                {/* 1. Main Browser Window */}
+                <motion.div 
+                  initial={{ opacity: 0, rotateY: 15, rotateX: 5, z: -100 }}
+                  animate={{ opacity: 1, rotateY: 0, rotateX: 0, z: 0 }}
+                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+                  className="absolute inset-0 right-12 bottom-12 bg-white rounded-3xl overflow-hidden border border-black/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex flex-col"
+                >
+                  {/* Browser Header / Frame */}
+                  <div className="h-12 bg-[#f8f7f4] border-b border-black/5 flex items-center px-4 gap-2 shrink-0">
+                    <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                    <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                    <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                    <div className="ml-4 grow mr-12 h-5 bg-white rounded-md border border-black/5 flex items-center px-3">
+                        <div className="w-2/3 h-1.5 bg-gray-100 rounded-full" />
+                    </div>
+                  </div>
+                  
+                  {/* Browser Content */}
+                  <div className="p-8 flex flex-col gap-6 h-full bg-white relative overflow-hidden">
+                    {/* Background Grid Accent */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none" />
+                    
+                    <div className="w-24 h-4 bg-accent/20 rounded-full relative z-10" />
+                    <div className="w-[80%] h-14 bg-primary rounded-xl relative z-10" />
+                    <div className="w-[60%] h-4 bg-gray-100 rounded-full relative z-10" />
+                    
+                    <div className="flex gap-4 mt-2 relative z-10">
+                      <div className="w-28 h-10 bg-accent rounded-full" />
+                      <div className="w-28 h-10 bg-[#f8f7f4] rounded-full border border-black/5 shadow-sm" />
+                    </div>
+
+                    <div className="mt-auto grid grid-cols-2 gap-4 relative z-10">
+                      <div className="h-28 bg-[#f8f7f4] rounded-2xl border border-black/5 shadow-sm" />
+                      <div className="h-28 bg-[#f8f7f4] rounded-2xl border border-black/5 shadow-sm" />
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* 2. Floating Card: Performance/Stats */}
+                <motion.div
+                  initial={{ opacity: 0, x: -50, y: 30 }}
+                  animate={{ opacity: 1, x: -20, y: [40, 30, 40] }}
+                  transition={{ 
+                    opacity: { duration: 0.8, delay: 0.5 },
+                    x: { duration: 0.8, delay: 0.5, ease: "easeOut" },
+                    y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 } 
+                  }}
+                  className="absolute bottom-16 left-0 bg-white p-4 rounded-2xl shadow-xl border border-black/5 flex items-center gap-4 z-20 w-56"
+                >
+                  <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center shrink-0 shadow-md">
+                    <Zap className="w-6 h-6 fill-white stroke-transparent" />
+                  </div>
+                  <div className="flex flex-col gap-2 w-full">
+                    <div className="w-3/4 h-2.5 bg-gray-200 rounded-full" />
+                    <div className="w-1/2 h-2.5 bg-gray-100 rounded-full" />
+                  </div>
+                </motion.div>
+
+                {/* 3. Floating Graphic: Premium Image/Component */}
+                <motion.div
+                  initial={{ opacity: 0, y: -40, x: 20 }}
+                  animate={{ opacity: 1, y: [-20, -10, -20], x: 40 }}
+                  transition={{ 
+                    opacity: { duration: 0.8, delay: 0.7 },
+                    x: { duration: 0.8, delay: 0.7, ease: "easeOut" },
+                    y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.7 } 
+                  }}
+                  className="absolute top-10 right-0 bg-primary p-4 rounded-2xl shadow-2xl shadow-black/20 border border-[#222] z-30 w-36 aspect-square flex flex-col justify-between"
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                      <Monitor className="w-4 h-4 text-white/50" />
+                    </div>
+                    <div className="flex gap-1.5 mt-1 relative z-10">
+                      <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                    </div>
+                  </div>
+                  <div className="space-y-2 mt-auto">
+                    <div className="w-full h-2 bg-white/10 rounded-full" />
+                    <div className="w-2/3 h-2 bg-white/10 rounded-full" />
+                  </div>
+                  
+                  {/* Checked Badge overlaps bottom-left */}
+                  <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-white rounded-xl shadow-xl border border-black/5 flex items-center justify-center">
+                    <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center shadow-inner">
+                      <svg viewBox="0 0 24 24" fill="none" className="w-3 h-3 text-white">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </motion.div>
                 
-                <rect x="90" y="140" width="220" height="20" rx="10" fill="#e5e5e5"/>
-                <rect x="90" y="180" width="140" height="15" rx="7.5" fill="#f0f0f0"/>
-                <rect x="90" y="210" width="180" height="15" rx="7.5" fill="#f0f0f0"/>
+                {/* 4. Small decorative element */}
+                 <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1, y: [0, 10, 0] }}
+                  transition={{ 
+                    opacity: { duration: 0.5, delay: 1 },
+                    scale: { duration: 0.5, type: "spring", delay: 1 },
+                    y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 } 
+                  }}
+                  className="absolute top-[40%] -right-2 w-14 h-14 bg-white rounded-full shadow-xl border border-black/5 flex items-center justify-center z-10"
+                >
+                    <Smartphone className="w-6 h-6 text-accent" />
+                </motion.div>
                 
-                <rect x="90" y="260" width="100" height="40" rx="20" fill="#E63946"/>
-                <rect x="210" y="260" width="80" height="40" rx="20" fill="#111111"/>
-                
-                <circle cx="330" cy="220" r="40" fill="#E63946" stroke="#ffffff" strokeWidth="8"/>
-                <rect x="30" y="160" width="60" height="60" rx="15" fill="#ffffff" stroke="#e5e5e5" strokeWidth="2"/>
-                <path d="M45 190L55 200L75 180" stroke="#111111" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              </div>
             </FadeUp>
           </div>
         </div>

@@ -1,12 +1,19 @@
+import { useState } from 'react';
 import FadeUp from '../components/ui/FadeUp';
 import Button from '../components/ui/Button';
-import { Check } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 
 const Pricing = () => {
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+
   const plans = [
     {
       name: "Basic",
-      price: "₹4,999",
+      price: "₹7,999",
       desc: "Perfect for a simple, professional single-page presence.",
       features: [
         "Landing Page", 
@@ -15,26 +22,24 @@ const Pricing = () => {
         "Basic SEO, Optimised",
         "3-5 Days Delivery"
       ],
-      buttonText: "Get Started",
       highlight: false
     },
     {
       name: "Professional",
-      price: "₹12,999",
+      price: "₹14,999",
       desc: "Best for growing businesses needing a strong multi-page presence.",
       features: [
         "Up to 6-7 pages", 
         "Premium Design", 
-        "Whatsapp Integration", 
+        "Custom design & animations", 
         "Mobile responsive & SEO",
         "Fast Delivery"
       ],
-      buttonText: "Most Popular",
       highlight: true
     },
     {
       name: "Enterprise",
-      price: "₹24,999",
+      price: "₹34,999",
       desc: "Ideal for businesses that want a fully loaded digital experience.",
       features: [
         "Everything in Professional",
@@ -43,7 +48,6 @@ const Pricing = () => {
         "Advanced SEO & Analytics",
         "Priority Support"
       ],
-      buttonText: "Elevate Brand",
       highlight: false
     },
     {
@@ -57,10 +61,56 @@ const Pricing = () => {
         "E-commerce capabilities",
         "Ongoing Maintenance"
       ],
-      buttonText: "Request Quote",
       highlight: false
     }
   ];
+
+  const handleSelectPlan = (plan) => {
+    setSelectedPlan(plan);
+    setIsSubmitted(false);
+    setError(false);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+        setSelectedPlan(null);
+        setIsSubmitted(false);
+    }, 300); // Wait for transition
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(false);
+    
+    const form = e.target;
+    // Inject the selected plan into the form data before submission
+    const formData = new FormData(form);
+    formData.append("Selected Plan", selectedPlan.name);
+    formData.append("Plan Price", selectedPlan.price);
+    
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/hubthreefold@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="w-full">
@@ -115,17 +165,127 @@ const Pricing = () => {
                   </div>
 
                   <Button 
-                    to="/contact" 
+                    onClick={() => handleSelectPlan(plan)} 
                     variant={plan.highlight ? "accent" : "secondary"} 
                     className="w-full"
                   >
-                    {plan.buttonText}
+                    Select
                   </Button>
                 </div>
              </FadeUp>
           ))}
         </div>
       </section>
+
+      {/* Pop-up Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+            <div 
+                className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
+                onClick={closeModal}
+            ></div>
+            
+            <div className="relative w-full max-w-md bg-white rounded-4xl p-8 shadow-2xl z-10 animate-in zoom-in-95 duration-300">
+                <button 
+                  onClick={closeModal}
+                  className="absolute top-6 right-6 text-gray-400 hover:text-black transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+
+                {isSubmitted ? (
+                    <div className="flex flex-col items-center justify-center py-10 text-center animate-in fade-in duration-500">
+                      <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-md">
+                        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <h4 className="text-2xl font-heading font-medium mb-3 text-primary">Request Sent!</h4>
+                      <p className="text-gray-500 font-light text-sm max-w-[250px]">
+                        We've received your request for the <strong className="font-semibold text-black">{selectedPlan?.name} Plan</strong>. We'll be in touch shortly.
+                      </p>
+                      <Button onClick={closeModal} className="mt-8 w-full">Close</Button>
+                    </div>
+                ) : (
+                    <>
+                        <div className="mb-8">
+                            <h3 className="text-2xl font-heading font-medium text-primary mb-2">Request Plan</h3>
+                            <p className="text-gray-500 text-sm">
+                                You selected the <strong className="text-black">{selectedPlan?.name}</strong> at {selectedPlan?.price}. Provide your details below.
+                            </p>
+                        </div>
+                        
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                            {/* Honeypot */}
+                            <input type="text" name="_honey" style={{ display: 'none' }} />
+                            {/* Keep subject pristine */}
+                            <input type="hidden" name="_subject" value={`New Plan Request: ${selectedPlan?.name}`} />
+                            
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm font-medium text-gray-600">Full Name</label>
+                                <input 
+                                    type="text" 
+                                    name="name"
+                                    required
+                                    className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all"
+                                    placeholder="Your Name"
+                                />
+                            </div>
+                            
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm font-medium text-gray-600">Email Address</label>
+                                <input 
+                                    type="email" 
+                                    name="email"
+                                    required
+                                    className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all"
+                                    placeholder="your@email.com"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm font-medium text-gray-600">Phone Number</label>
+                                <input 
+                                    type="tel" 
+                                    name="phone"
+                                    required
+                                    className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all"
+                                    placeholder="+91 98765 43210"
+                                />
+                            </div>
+
+                            {selectedPlan?.name === "Custom" && (
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-sm font-medium text-gray-600">Project Requirements</label>
+                                    <textarea 
+                                        name="requirements"
+                                        required
+                                        rows={3}
+                                        className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all resize-none"
+                                        placeholder="Tell us exactly what you're looking to build..."
+                                    />
+                                </div>
+                            )}
+
+                            {error && (
+                                <div className="text-red-500 text-xs mt-1">
+                                    An error occurred while sending your request. Please try again.
+                                </div>
+                            )}
+
+                            <button 
+                                type="submit" 
+                                disabled={isSubmitting}
+                                className="w-full mt-2 px-6 py-4 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition-colors disabled:opacity-70 flex justify-center items-center"
+                            >
+                                {isSubmitting ? 'Sending Request...' : 'Submit Request'}
+                            </button>
+                        </form>
+                    </>
+                )}
+            </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -11,6 +11,8 @@ import About from './pages/About';
 import Works from './pages/Works';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Demos
 import GymDemo from './pages/demos/GymDemo';
@@ -43,6 +45,8 @@ function App() {
           <Route path="/works" element={<Works />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
           
           {/* Demo Routes */}
           <Route path="/demo/gym" element={<GymDemo />} />
