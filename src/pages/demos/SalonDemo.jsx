@@ -38,7 +38,7 @@ const SalonDemo = () => {
                     <Button className="bg-stone-900 text-stone-50 hover:bg-stone-800 rounded-none px-8 py-4 font-light tracking-widest uppercase text-sm">
                       Book Appointment
                     </Button>
-                    <Button className="bg-white/90 backdrop-blur border border-stone-200 text-stone-900 hover:bg-white rounded-none px-8 py-4 tracking-widest uppercase text-sm font-medium shadow-sm">
+                    <Button className="bg-surface/90 backdrop-blur border border-stone-200 text-stone-900 hover:bg-surface rounded-none px-8 py-4 tracking-widest uppercase text-sm font-medium shadow-sm">
                       View Services
                     </Button>
                  </div>
@@ -58,7 +58,7 @@ const SalonDemo = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 bg-white border-y border-stone-200/50">
+      <section id="services" className="py-24 bg-surface border-y border-stone-200/50">
         <div className="max-w-7xl mx-auto px-6">
            <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-serif tracking-tight text-stone-900 mb-4">Our Services</h2>
@@ -116,7 +116,7 @@ const SalonDemo = () => {
       </section>
 
       {/* Stylists */}
-      <section id="stylists" className="py-24 bg-white">
+      <section id="stylists" className="py-24 bg-surface">
         <div className="max-w-7xl mx-auto px-6 text-center">
            <FadeUp className="mb-16">
               <h2 className="text-4xl font-serif tracking-tight text-stone-900 mb-4">Meet The Artists</h2>

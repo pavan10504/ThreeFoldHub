@@ -15,7 +15,7 @@ const ClinicDemo = () => {
           <a href="#services" className="hover:text-[#1a2b32] transition-colors">Services</a>
           <a href="#physicians" className="hover:text-[#1a2b32] transition-colors">Physicians</a>
         </div>
-        <Button className="bg-[#1a2b32] text-white hover:bg-[#2c3e45] rounded-none px-8 py-3 text-xs tracking-widest uppercase font-light">
+        <Button className="bg-[#1a2b32] text-surface hover:bg-[#2c3e45] rounded-none px-8 py-3 text-xs tracking-widest uppercase font-light">
           Consultation
         </Button>
       </nav>
@@ -35,7 +35,7 @@ const ClinicDemo = () => {
                    Experience a new standard of personalized, luxury medical care in a tranquil environment designed for your holistic well-being.
                  </p>
                  <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                    <Button className="bg-[#1a2b32] text-white hover:bg-[#2c3e45] rounded-none px-8 py-4 font-light tracking-widest uppercase text-sm">
+                    <Button className="bg-[#1a2b32] text-surface hover:bg-[#2c3e45] rounded-none px-8 py-4 font-light tracking-widest uppercase text-sm">
                       Book Appointment
                     </Button>
                     <button className="bg-transparent border border-[#d6e0e3] text-[#1a2b32] hover:bg-[#eaf0f2] transition-colors rounded-none px-8 py-4 tracking-widest uppercase text-sm font-medium">
@@ -53,7 +53,7 @@ const ClinicDemo = () => {
                     alt="Abstract Luxury Clinic Architecture" 
                     className="w-full h-full object-cover rounded-t-full relative z-10 shadow-2xl shadow-[#1a2b32]/20"
                  />
-                 <div className="absolute bottom-10 -left-10 bg-white p-8 shadow-xl z-20 max-w-xs border border-[#eaf0f2]">
+                 <div className="absolute bottom-10 -left-10 bg-surface p-8 shadow-xl z-20 max-w-xs border border-[#eaf0f2]">
                     <div className="text-2xl font-serif text-[#1a2b32] mb-2">Holistic Care</div>
                     <p className="text-[#4a646c] font-light text-sm">Integrating advanced medicine with profound tranquility.</p>
                  </div>
@@ -63,7 +63,7 @@ const ClinicDemo = () => {
       </section>
 
       {/* Our Distinctive Approach */}
-      <section id="approach" className="py-32 bg-white">
+      <section id="approach" className="py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
            <FadeUp className="mb-20 text-center max-w-3xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-serif text-[#1a2b32] mb-6">Our Distinctive Approach</h2>
@@ -106,12 +106,12 @@ const ClinicDemo = () => {
                  <div className="flex flex-col gap-8 border-t border-[#4a646c] pt-8">
                     {["Aesthetic Medicine", "Preventative Health", "Wellness & Longevity", "Concierge Medicine"].map((service, idx) => (
                        <div key={idx} className="flex justify-between items-center group cursor-pointer pb-8 border-b border-[#324951]">
-                          <span className="text-2xl md:text-3xl font-serif text-[#b5c7cd] group-hover:text-white transition-colors">{service}</span>
-                          <ArrowRight className="text-[#4a646c] group-hover:text-white group-hover:translate-x-2 transition-all" />
+                          <span className="text-2xl md:text-3xl font-serif text-[#b5c7cd] group-hover:text-surface transition-colors">{service}</span>
+                          <ArrowRight className="text-[#4a646c] group-hover:text-surface group-hover:translate-x-2 transition-all" />
                        </div>
                     ))}
                  </div>
-                 <Button className="mt-12 bg-transparent border border-[#4a646c] text-[#f8f7f4] hover:bg-white hover:text-[#1a2b32] rounded-none px-8 py-4 tracking-widest uppercase text-xs font-medium transition-all">
+                 <Button className="mt-12 bg-transparent border border-[#4a646c] text-[#f8f7f4] hover:bg-surface hover:text-[#1a2b32] rounded-none px-8 py-4 tracking-widest uppercase text-xs font-medium transition-all">
                     View All Services
                  </Button>
               </FadeUp>
@@ -122,7 +122,7 @@ const ClinicDemo = () => {
       {/* Booking Form Overlay Style */}
       <section className="py-32 bg-[#eaf0f2]">
         <div className="max-w-5xl mx-auto px-6">
-           <FadeUp className="bg-white p-12 md:p-20 shadow-2xl shadow-[#1a2b32]/5 rounded-sm relative overflow-hidden">
+           <FadeUp className="bg-surface p-12 md:p-20 shadow-2xl shadow-[#1a2b32]/5 rounded-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#f8f7f4] rounded-bl-full z-0"></div>
               
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -146,7 +146,7 @@ const ClinicDemo = () => {
                        <option>Preventative Health</option>
                        <option>Concierge Medicine</option>
                     </select>
-                    <Button className="mt-6 bg-[#1a2b32] hover:bg-[#2c3e45] text-white py-5 rounded-none tracking-widest uppercase text-xs">
+                    <Button className="mt-6 bg-[#1a2b32] hover:bg-[#2c3e45] text-surface py-5 rounded-none tracking-widest uppercase text-xs">
                        Submit Request
                     </Button>
                  </form>

@@ -4,7 +4,7 @@ import { Dumbbell, HeartPulse, Flame, Timer, MapPin, Phone, Mail, CheckCircle2 }
 
 const GymDemo = () => {
   return (
-    <div className="w-full bg-zinc-950 text-white min-h-screen font-sans">
+    <div className="w-full bg-zinc-950 text-surface min-h-screen font-sans">
       {/* Navigation */}
       <nav className="p-6 border-b border-white/5 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -15,12 +15,12 @@ const GymDemo = () => {
             IronPulse <span className="text-red-500">Fitness.</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-bold uppercase text-zinc-400 tracking-wider">
-            <a href="#classes" className="hover:text-white transition-colors">Classes</a>
-            <a href="#trainers" className="hover:text-white transition-colors">Trainers</a>
-            <a href="#plans" className="hover:text-white transition-colors">Plans</a>
-            <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <a href="#classes" className="hover:text-surface transition-colors">Classes</a>
+            <a href="#trainers" className="hover:text-surface transition-colors">Trainers</a>
+            <a href="#plans" className="hover:text-surface transition-colors">Plans</a>
+            <a href="#contact" className="hover:text-surface transition-colors">Contact</a>
           </div>
-          <Button className="bg-red-600 text-white hover:bg-red-700 uppercase font-black tracking-wider text-xs hidden md:inline-flex">
+          <Button className="bg-red-600 text-surface hover:bg-red-700 uppercase font-black tracking-wider text-xs hidden md:inline-flex">
             Join Now
           </Button>
         </div>
@@ -40,17 +40,17 @@ const GymDemo = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeUp>
-             <h1 className="text-5xl md:text-[7rem] font-heading font-black uppercase leading-[0.9] tracking-tighter text-white mb-6">
+             <h1 className="text-5xl md:text-[7rem] font-heading font-black uppercase leading-[0.9] tracking-tighter text-surface mb-6">
                Train Hard.<br/><span className="text-transparent bg-clip-text bg-linear-to-tr from-red-600 to-orange-500">Get Strong.</span>
              </h1>
              <p className="text-lg md:text-2xl text-zinc-400 max-w-2xl font-medium mb-12 border-l-4 border-red-600 pl-6">
                State-of-the-art gym with world-class trainers and modern equipment. Build the best version of yourself today.
              </p>
              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <Button className="bg-red-600 text-white hover:bg-red-700 py-6 px-10 text-lg uppercase font-black">
+                <Button className="bg-red-600 text-surface hover:bg-red-700 py-6 px-10 text-lg uppercase font-black">
                   Join Now
                 </Button>
-                <Button className="bg-transparent border border-white text-white hover:bg-white hover:text-black py-6 px-10 text-lg uppercase font-black">
+                <Button className="bg-transparent border border-white text-surface hover:bg-surface hover:text-primary py-6 px-10 text-lg uppercase font-black">
                   View Classes
                 </Button>
              </div>
@@ -142,17 +142,17 @@ const GymDemo = () => {
                        <h3 className="text-2xl font-black uppercase mb-2">{plan.name}</h3>
                        <div className="flex items-end gap-1 mb-8">
                           <span className="text-5xl font-black">{plan.price}</span>
-                          <span className={plan.highlight ? 'text-white/80' : 'text-zinc-500'}>/mo</span>
+                          <span className={plan.highlight ? 'text-surface/80' : 'text-zinc-500'}>/mo</span>
                        </div>
                        <ul className="space-y-4 mb-10 grow">
                           {plan.features.map((feat, i) => (
                             <li key={i} className="flex items-center gap-3 text-stone-400 font-medium">
-                               <CheckCircle2 className={`w-5 h-5 ${plan.highlight ? 'text-white' : 'text-red-500'}`} />
+                               <CheckCircle2 className={`w-5 h-5 ${plan.highlight ? 'text-surface' : 'text-red-500'}`} />
                                {feat}
                             </li>
                           ))}
                        </ul>
-                       <button className={`w-full py-4 rounded-full font-black uppercase tracking-wider transition-all duration-300 ${plan.highlight ? 'bg-white text-red-600 hover:bg-zinc-100 shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-zinc-800 text-white hover:bg-zinc-700'}`}>
+                       <button className={`w-full py-4 rounded-full font-black uppercase tracking-wider transition-all duration-300 ${plan.highlight ? 'bg-surface text-red-600 hover:bg-zinc-100 shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-zinc-800 text-surface hover:bg-zinc-700'}`}>
                           Select Plan
                        </button>
                     </div>
@@ -222,13 +222,13 @@ const GymDemo = () => {
            <FadeUp delay={0.2}>
               <form className="bg-zinc-950 p-8 rounded-xl border border-white/5" onSubmit={e => e.preventDefault()}>
                  <div className="mb-6">
-                    <input type="text" placeholder="YOUR NAME" className="w-full bg-zinc-900 border border-white/10 rounded tracking-widest uppercase text-sm p-4 text-white focus:outline-none focus:border-red-500 transition-colors" />
+                    <input type="text" placeholder="YOUR NAME" className="w-full bg-zinc-900 border border-white/10 rounded tracking-widest uppercase text-sm p-4 text-surface focus:outline-none focus:border-red-500 transition-colors" />
                  </div>
                  <div className="mb-6">
-                    <input type="email" placeholder="YOUR EMAIL" className="w-full bg-zinc-900 border border-white/10 rounded tracking-widest uppercase text-sm p-4 text-white focus:outline-none focus:border-red-500 transition-colors" />
+                    <input type="email" placeholder="YOUR EMAIL" className="w-full bg-zinc-900 border border-white/10 rounded tracking-widest uppercase text-sm p-4 text-surface focus:outline-none focus:border-red-500 transition-colors" />
                  </div>
                  <div className="mb-6">
-                    <textarea placeholder="MESSAGE" rows="4" className="w-full bg-zinc-900 border border-white/10 rounded tracking-widest uppercase text-sm p-4 text-white focus:outline-none focus:border-red-500 transition-colors resize-none"></textarea>
+                    <textarea placeholder="MESSAGE" rows="4" className="w-full bg-zinc-900 border border-white/10 rounded tracking-widest uppercase text-sm p-4 text-surface focus:outline-none focus:border-red-500 transition-colors resize-none"></textarea>
                  </div>
                  <Button className="w-full bg-red-600 hover:bg-red-700 uppercase font-black tracking-widest py-4">
                     Send Message

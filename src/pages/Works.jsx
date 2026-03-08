@@ -7,7 +7,7 @@ const works = [
     desc: "Bold and energetic design for a local gym.",
     path: "/demo/gym",
     color: "bg-zinc-900",
-    textColor: "text-white"
+    textColor: "text-surface"
   },
   {
     title: "Artisan Café",
@@ -40,8 +40,8 @@ const Works = () => {
           <h1 className="text-5xl md:text-7xl font-heading font-medium tracking-tight mb-8 text-balance">
             Our Work & Demos
           </h1>
-          <p className="text-xl md:text-2xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed text-balance">
-            Explore our handcrafted templates designed specifically for growing local businesses.
+          <p className="text-xl md:text-2xl text-primary/60 font-light max-w-2xl mx-auto leading-relaxed text-balance">
+            Explore our handcrafted designed specifically for growing local businesses.
           </p>
         </FadeUp>
       </section>
@@ -50,7 +50,7 @@ const Works = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {works.map((item, idx) => (
              <FadeUp key={idx} delay={idx * 0.1}>
-                <div className="group p-8 rounded-4xl border border-black/5 hover:border-black/10 hover-lift bg-white relative overflow-hidden transition-all duration-300">
+                <div className="group p-8 rounded-4xl border border-primary/5 hover:border-primary/10 hover-lift bg-surface relative overflow-hidden transition-all duration-300">
                    {/* Preview Image / Placeholder */}
                    <div className={`h-64 w-full flex items-center justify-center relative overflow-hidden rounded-2xl mb-6`}>
                       <img 
@@ -66,10 +66,10 @@ const Works = () => {
                       <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
                    </div>
                    {/* Card Content */}
-                   <div className="flex flex-col justify-between bg-white relative z-10">
+                   <div className="flex flex-col justify-between bg-surface relative z-10">
                       <div>
                          <h3 className="text-2xl font-heading font-medium mb-2">{item.title}</h3>
-                         <p className="text-gray-500">{item.desc}</p>
+                         <p className="text-primary/60">{item.desc}</p>
                       </div>
                       <div className="pt-6">
                          <Button to={item.path} variant="secondary" className="w-full">

@@ -16,7 +16,7 @@ const About = () => {
         </FadeUp>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <FadeUp>
@@ -30,10 +30,10 @@ const About = () => {
                  <motion.div 
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="w-full h-full border border-black/10 rounded-full flex items-center justify-center relative"
+                    className="w-full h-full border border-primary/10 rounded-full flex items-center justify-center relative"
                  >
-                    <div className="w-2/3 h-2/3 border border-black/10 rounded-full absolute" />
-                    <div className="w-1/3 h-1/3 border border-black/10 rounded-full absolute" />
+                    <div className="w-2/3 h-2/3 border border-primary/10 rounded-full absolute" />
+                    <div className="w-1/3 h-1/3 border border-primary/10 rounded-full absolute" />
                     <div className="w-6 h-6 bg-accent rounded-full absolute top-[10%]" />
                  </motion.div>
               </div>
@@ -60,7 +60,7 @@ const About = () => {
               "Premium handcrafted feel"
             ].map((reason, idx) => (
               <FadeUp key={idx} delay={idx * 0.1}>
-                <div className="p-8 bg-white border border-black/5 rounded-2xl hover-lift">
+                <div className="p-8 bg-surface border border-primary/5 rounded-2xl hover-lift">
                   <div className="w-10 h-10 bg-black/5 flex items-center justify-center rounded-xl mb-6 text-primary font-medium">
                     0{idx + 1}
                   </div>
@@ -72,7 +72,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="py-32 bg-primary text-white rounded-[3rem] mx-4 md:mx-12 my-12 text-center">
+      <section className="py-32 bg-primary text-surface rounded-[3rem] mx-4 md:mx-12 my-12 text-center">
         <div className="max-w-4xl mx-auto px-6">
           <FadeUp>
              <h2 className="text-4xl md:text-6xl font-heading font-medium tracking-tight mb-10 leading-tight">

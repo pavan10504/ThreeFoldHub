@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
+import CookieBanner from './CookieBanner';
 
 const Layout = ({ children }) => {
   return (
@@ -8,6 +9,7 @@ const Layout = ({ children }) => {
       <main className="grow pt-24 pb-12">
         {children}
       </main>
+      <CookieBanner />
       <Footer />
     </div>
   );

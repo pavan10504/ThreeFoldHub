@@ -41,12 +41,12 @@ const LegalLayout = ({ title, date, sections }) => {
   };
 
   return (
-    <div className="w-full bg-(--color-bg-base) min-h-screen pt-32 pb-24">
+    <div className="w-full bg-bg-base min-h-screen pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-16 relative">
         
         {/* Sidebar Table of Contents */}
         <aside className="lg:w-1/4 shrink-0">
-          <div className="sticky top-32 bg-white p-8 rounded-3xl border border-black/5 shadow-sm">
+          <div className="sticky top-32 bg-surface p-8 rounded-3xl border border-primary/5 shadow-sm">
             <h3 className="font-heading font-medium text-lg mb-6">Table of Contents</h3>
             <ul className="flex flex-col gap-3">
               {sections.map(section => (

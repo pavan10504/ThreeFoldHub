@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Monitor, Smartphone, Zap } from 'lucide-react';
@@ -5,6 +6,11 @@ import FadeUp from '../components/ui/FadeUp';
 import Button from '../components/ui/Button';
 
 const Home = () => {
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const mockupY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  
   const services = [
     {
       title: "Business Websites",
@@ -49,14 +55,14 @@ const Home = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 z-0">
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Subtle Background Elements with Parallax */}
+        <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
           <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] rounded-full bg-accent/5 blur-[120px]" />
-          <div className="absolute bottom-[10%] left-[5%] w-[600px] h-[600px] rounded-full bg-black/5 blur-[150px]" />
-        </div>
+          <div className="absolute bottom-[10%] left-[5%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[150px]" />
+        </motion.div>
 
-        <div className="container mx-auto px-6 max-w-7xl relative z-10 pt-20 flex flex-col md:flex-row items-center gap-12">
+        <div className="container mx-auto px-6 max-w-7xl relative z-10 pt-28 pb-20 flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2 max-w-2xl">
             <FadeUp>
               <h1 className="text-6xl md:text-8xl font-heading font-semibold tracking-tight leading-[1.05] text-balance mb-8">
@@ -71,8 +77,8 @@ const Home = () => {
             </FadeUp>
             
             <FadeUp delay={0.2}>
-              <p className="text-xl md:text-2xl text-gray-500 font-light max-w-2xl leading-relaxed mb-12 text-balance">
-                We design fast, modern websites for shops, clinics, cafés, gyms and small businesses that want to stand out online.
+              <p className="text-xl md:text-2xl text-primary/60 font-light max-w-2xl leading-relaxed mb-12 text-balance">
+                Your business deserves a digital experience as premium as the services you offer. We build stunning, high-performance websites that capture attention and drive real growth.
               </p>
             </FadeUp>
 
@@ -84,27 +90,27 @@ const Home = () => {
 
           <div className="hidden md:flex md:w-1/2 justify-center relative">
             <FadeUp delay={0.3} className="relative w-full max-w-lg aspect-square flex items-center justify-center">
-              {/* Premium Layered UI Mockup */}
-              <div className="relative w-full h-[85%] mx-auto style={{ perspective: '1200px' }}">
+              {/* Premium Layered UI Mockup with Parallax scrolling */}
+              <motion.div style={{ y: mockupY, perspective: '1200px' }} className="relative w-full h-[85%] mx-auto">
                 {/* 1. Main Browser Window */}
                 <motion.div 
                   initial={{ opacity: 0, rotateY: 15, rotateX: 5, z: -100 }}
                   animate={{ opacity: 1, rotateY: 0, rotateX: 0, z: 0 }}
                   transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-                  className="absolute inset-0 right-12 bottom-12 bg-white rounded-3xl overflow-hidden border border-black/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex flex-col"
+                  className="absolute inset-0 right-12 bottom-12 bg-surface rounded-3xl overflow-hidden border border-primary/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex flex-col"
                 >
                   {/* Browser Header / Frame */}
-                  <div className="h-12 bg-[#f8f7f4] border-b border-black/5 flex items-center px-4 gap-2 shrink-0">
+                  <div className="h-12 bg-[#f8f7f4] border-b border-primary/5 flex items-center px-4 gap-2 shrink-0">
                     <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                     <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                     <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-                    <div className="ml-4 grow mr-12 h-5 bg-white rounded-md border border-black/5 flex items-center px-3">
+                    <div className="ml-4 grow mr-12 h-5 bg-surface rounded-md border border-primary/5 flex items-center px-3">
                         <div className="w-2/3 h-1.5 bg-gray-100 rounded-full" />
                     </div>
                   </div>
                   
                   {/* Browser Content */}
-                  <div className="p-8 flex flex-col gap-6 h-full bg-white relative overflow-hidden">
+                  <div className="p-8 flex flex-col gap-6 h-full bg-surface relative overflow-hidden">
                     {/* Background Grid Accent */}
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none" />
                     
@@ -114,12 +120,12 @@ const Home = () => {
                     
                     <div className="flex gap-4 mt-2 relative z-10">
                       <div className="w-28 h-10 bg-accent rounded-full" />
-                      <div className="w-28 h-10 bg-[#f8f7f4] rounded-full border border-black/5 shadow-sm" />
+                      <div className="w-28 h-10 bg-[#f8f7f4] rounded-full border border-primary/5 shadow-sm" />
                     </div>
 
                     <div className="mt-auto grid grid-cols-2 gap-4 relative z-10">
-                      <div className="h-28 bg-[#f8f7f4] rounded-2xl border border-black/5 shadow-sm" />
-                      <div className="h-28 bg-[#f8f7f4] rounded-2xl border border-black/5 shadow-sm" />
+                      <div className="h-28 bg-[#f8f7f4] rounded-2xl border border-primary/5 shadow-sm" />
+                      <div className="h-28 bg-[#f8f7f4] rounded-2xl border border-primary/5 shadow-sm" />
                     </div>
                   </div>
                 </motion.div>
@@ -133,9 +139,9 @@ const Home = () => {
                     x: { duration: 0.8, delay: 0.5, ease: "easeOut" },
                     y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 } 
                   }}
-                  className="absolute bottom-16 left-0 bg-white p-4 rounded-2xl shadow-xl border border-black/5 flex items-center gap-4 z-20 w-56"
+                  className="absolute bottom-16 left-0 bg-surface p-4 rounded-2xl shadow-xl border border-primary/5 flex items-center gap-4 z-20 w-56"
                 >
-                  <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center shrink-0 shadow-md">
+                  <div className="w-12 h-12 rounded-full bg-accent text-surface flex items-center justify-center shrink-0 shadow-md">
                     <Zap className="w-6 h-6 fill-white stroke-transparent" />
                   </div>
                   <div className="flex flex-col gap-2 w-full">
@@ -153,26 +159,26 @@ const Home = () => {
                     x: { duration: 0.8, delay: 0.7, ease: "easeOut" },
                     y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.7 } 
                   }}
-                  className="absolute top-10 right-0 bg-primary p-4 rounded-2xl shadow-2xl shadow-black/20 border border-[#222] z-30 w-36 aspect-square flex flex-col justify-between"
+                  className="absolute top-10 right-0 bg-primary p-4 rounded-2xl shadow-2xl shadow-primary/20 border border-[#222] z-30 w-36 aspect-square flex flex-col justify-between"
                 >
                   <div className="flex justify-between items-start">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                      <Monitor className="w-4 h-4 text-white/50" />
+                    <div className="w-8 h-8 rounded-full bg-surface/10 flex items-center justify-center">
+                      <Monitor className="w-4 h-4 text-surface/50" />
                     </div>
                     <div className="flex gap-1.5 mt-1 relative z-10">
-                      <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                      <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-surface/20" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-surface/20" />
                     </div>
                   </div>
                   <div className="space-y-2 mt-auto">
-                    <div className="w-full h-2 bg-white/10 rounded-full" />
-                    <div className="w-2/3 h-2 bg-white/10 rounded-full" />
+                    <div className="w-full h-2 bg-surface/10 rounded-full" />
+                    <div className="w-2/3 h-2 bg-surface/10 rounded-full" />
                   </div>
                   
                   {/* Checked Badge overlaps bottom-left */}
-                  <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-white rounded-xl shadow-xl border border-black/5 flex items-center justify-center">
+                  <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-surface rounded-xl shadow-xl border border-primary/5 flex items-center justify-center">
                     <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center shadow-inner">
-                      <svg viewBox="0 0 24 24" fill="none" className="w-3 h-3 text-white">
+                      <svg viewBox="0 0 24 24" fill="none" className="w-3 h-3 text-surface">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
@@ -188,19 +194,19 @@ const Home = () => {
                     scale: { duration: 0.5, type: "spring", delay: 1 },
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 } 
                   }}
-                  className="absolute top-[40%] -right-2 w-14 h-14 bg-white rounded-full shadow-xl border border-black/5 flex items-center justify-center z-10"
+                  className="absolute top-[40%] -right-2 w-14 h-14 bg-surface rounded-full shadow-xl border border-primary/5 flex items-center justify-center z-10"
                 >
                     <Smartphone className="w-6 h-6 text-accent" />
                 </motion.div>
                 
-              </div>
+              </motion.div>
             </FadeUp>
           </div>
         </div>
       </section>
 
       {/* What We Offer */}
-      <section className="py-32 bg-white relative">
+      <section className="py-32 bg-surface relative">
         <div className="max-w-7xl mx-auto px-6">
           <FadeUp>
             <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight mb-16">
@@ -211,12 +217,12 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, idx) => (
               <FadeUp key={idx} delay={idx * 0.1}>
-                <div className="group p-10 h-full rounded-4xl bg-(--color-bg-base) border border-black/5 hover:border-black/10 hover-lift relative overflow-hidden transition-colors">
-                  <div className="bg-white w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-500 ease-out">
+                <div className="group p-10 h-full rounded-4xl bg-bg-base border border-primary/5 hover:border-primary/10 hover-lift relative overflow-hidden transition-colors">
+                  <div className="bg-surface w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-500 ease-out">
                     {service.icon}
                   </div>
                   <h3 className="text-2xl font-heading font-medium mb-4">{service.title}</h3>
-                  <p className="text-gray-500 leading-relaxed group-hover:text-gray-600 transition-colors">{service.desc}</p>
+                  <p className="text-primary/60 leading-relaxed group-hover:text-primary/80 transition-colors">{service.desc}</p>
                   
                   {/* Subtle animated background shape */}
                   <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-black/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors duration-500" />
@@ -237,7 +243,7 @@ const Home = () => {
                   <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight mb-6">
                     How We Work
                   </h2>
-                  <p className="text-gray-500 text-lg leading-relaxed text-balance">
+                  <p className="text-primary/60 text-lg leading-relaxed text-balance">
                     A streamlined, transparent process designed to get your business online quickly and beautifully.
                   </p>
                 </FadeUp>
@@ -251,11 +257,11 @@ const Home = () => {
                     <div className="text-2xl font-mono text-gray-300 font-medium group-hover:text-accent transition-colors pt-1">
                       {step.num}
                     </div>
-                    <div className="pb-12 border-b border-black/10 group-hover:border-black/20 transition-colors grow">
+                    <div className="pb-12 border-b border-primary/10 group-hover:border-primary/20 transition-colors grow">
                       <h3 className="text-3xl font-heading font-medium mb-4 tracking-tight group-hover:translate-x-2 transition-transform duration-500 ease-out">
                         {step.title}
                       </h3>
-                      <p className="text-gray-500 text-lg max-w-xl leading-relaxed">
+                      <p className="text-primary/60 text-lg max-w-xl leading-relaxed">
                         {step.desc}
                       </p>
                     </div>
@@ -268,7 +274,7 @@ const Home = () => {
       </section>
       
       {/* Ready CTA */}
-      <section className="py-32 bg-primary text-white rounded-[3rem] mx-4 md:mx-12 my-12 relative overflow-hidden">
+      <section className="py-32 bg-primary text-surface rounded-[3rem] mx-4 md:mx-12 my-12 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-[500px] bg-accent/20 blur-[150px] rounded-full pointer-events-none" />
         </div>
@@ -278,7 +284,7 @@ const Home = () => {
             <h2 className="text-5xl md:text-7xl font-heading font-medium tracking-tight mb-8">
               Ready to elevate your business?
             </h2>
-            <p className="text-xl text-gray-400 font-light mb-12">
+            <p className="text-xl text-surface/70 font-light mb-12">
               Let's create a digital experience that converts visitors into loyal customers.
             </p>
             <Button to="/contact" variant="secondary" className="border-none mt-4 hover:shadow-2xl">

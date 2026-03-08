@@ -63,19 +63,19 @@ const Contact = () => {
 
             <FadeUp delay={0.2} className="flex flex-col gap-8">
               <a href="mailto:hubthreefold@gmail.com" className="flex items-center gap-4 group">
-                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-black/10 group-hover:border-black/30 transition-colors shrink-0">
-                    <Mail className="w-5 h-5 text-primary" />
+                 <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center border border-primary/10 group-hover:bg-primary group-hover:border-primary transition-colors shrink-0">
+                    <Mail className="w-5 h-5 text-primary group-hover:text-surface transition-colors" />
                  </div>
                  <span className="text-lg font-medium group-hover:text-accent transition-colors">hubthreefold@gmail.com</span>
               </a>
               <a href="tel:+91 9980157156" className="flex items-center gap-4 group">
-                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-black/10 group-hover:border-black/30 transition-colors shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
+                 <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center border border-primary/10 group-hover:bg-primary group-hover:border-primary transition-colors shrink-0">
+                    <Phone className="w-5 h-5 text-primary group-hover:text-surface transition-colors" />
                  </div>
                  <span className="text-lg font-medium group-hover:text-accent transition-colors">+91 99801 57156</span>
               </a>
               <a href="https://wa.me/919980157156" target="_blank" rel="noreferrer" className="flex items-center gap-4 group">
-                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-black/10 group-hover:border-black/30 hover:bg-[#25D366] hover:border-[#25D366] transition-colors shrink-0">
+                 <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center border border-primary/10 group-hover:bg-[#25D366] group-hover:border-[#25D366] transition-colors shrink-0">
                     <MessageCircle className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
                  </div>
                  <span className="text-lg font-medium group-hover:text-[#25D366] transition-colors">WhatsApp Us</span>
@@ -83,7 +83,7 @@ const Contact = () => {
             </FadeUp>
           </div>
 
-          <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-black/5 shadow-xl shadow-black/2">
+          <div className="bg-surface p-8 md:p-12 rounded-[2.5rem] border border-primary/5 shadow-xl shadow-primary/2">
             <FadeUp delay={0.3}>
               <h3 className="text-2xl font-heading font-medium mb-8">Send us a message</h3>
               {isSubmitted ? (
@@ -113,7 +113,7 @@ const Contact = () => {
                       id="name" 
                       name="name"
                       required
-                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
+                      className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-4 outline-none transition-all"
                       placeholder="Name"
                     />
                   </div>
@@ -124,7 +124,7 @@ const Contact = () => {
                       id="email"
                       name="email" 
                       required
-                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
+                      className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-4 outline-none transition-all"
                       placeholder="example@email.com"
                     />
                   </div>
@@ -135,7 +135,7 @@ const Contact = () => {
                       id="phone"
                       name="phone" 
                       required
-                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all"
+                      className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-4 outline-none transition-all"
                       placeholder="+91 98765 43210"
                     />
                   </div>
@@ -146,7 +146,7 @@ const Contact = () => {
                       name="message"
                       required
                       rows={4}
-                      className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-4 outline-none transition-all resize-none"
+                      className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-4 outline-none transition-all resize-none"
                       placeholder="Tell us about your business..."
                     />
                   </div>
@@ -160,7 +160,7 @@ const Contact = () => {
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full mt-4 px-6 py-4 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition-colors hover-lift disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full mt-4 px-6 py-4 bg-primary text-surface text-sm font-medium rounded-full hover:bg-primary/90 transition-colors hover-lift disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>

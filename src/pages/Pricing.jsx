@@ -143,21 +143,21 @@ const Pricing = () => {
              <FadeUp key={idx} delay={idx * 0.1}>
                 <div className={`h-full relative rounded-[2.5rem] p-10 flex flex-col border hover-lift transition-all duration-500 ${
                   plan.highlight 
-                  ? 'bg-primary text-white border-primary shadow-2xl scale-105 z-10' 
-                  : 'bg-white text-primary border-black/10'
+                  ? 'bg-primary text-surface border-primary shadow-2xl scale-105 z-10' 
+                  : 'bg-surface text-primary border-primary/10'
                 }`}>
                   {plan.highlight && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-white px-4 py-1 text-sm font-medium rounded-full">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-surface px-4 py-1 text-sm font-medium rounded-full">
                       Recommended
                     </div>
                   )}
                   
                   <div className="mb-8">
-                    <h3 className={`text-2xl font-heading font-medium mb-4 ${plan.highlight ? 'text-white' : 'text-primary'}`}>{plan.name}</h3>
+                    <h3 className={`text-2xl font-heading font-medium mb-4 ${plan.highlight ? 'text-surface' : 'text-primary'}`}>{plan.name}</h3>
                     <div className="flex items-baseline gap-2 mb-4">
                       <span className="text-4xl font-heading font-semibold">{plan.price}</span>
                     </div>
-                    <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-gray-300' : 'text-gray-500'}`}>
+                    <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-surface/70' : 'text-primary/60'}`}>
                       {plan.desc}
                     </p>
                   </div>
@@ -166,8 +166,8 @@ const Pricing = () => {
                     <ul className="flex flex-col gap-4">
                       {plan.features.map((feature, fIdx) => (
                         <li key={fIdx} className="flex items-start gap-3 text-sm">
-                          <Check className={`w-5 h-5 shrink-0 ${plan.highlight ? 'text-white/80' : 'text-primary/70'}`} />
-                          <span className={plan.highlight ? 'text-gray-200' : 'text-gray-600'}>{feature}</span>
+                          <Check className={`w-5 h-5 shrink-0 ${plan.highlight ? 'text-surface/80' : 'text-primary/70'}`} />
+                          <span className={plan.highlight ? 'text-surface/80' : 'text-primary/80'}>{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -194,10 +194,10 @@ const Pricing = () => {
                 onClick={closeModal}
             ></div>
             
-            <div className="relative w-full max-w-md bg-white rounded-4xl p-8 shadow-2xl z-10 animate-in zoom-in-95 duration-300">
+            <div className="relative w-full max-w-md bg-surface rounded-4xl p-8 shadow-2xl z-10 animate-in zoom-in-95 duration-300">
                 <button 
                   onClick={closeModal}
-                  className="absolute top-6 right-6 text-gray-400 hover:text-black transition-colors"
+                  className="absolute top-6 right-6 text-gray-400 hover:text-primary transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -211,7 +211,7 @@ const Pricing = () => {
                       </div>
                       <h4 className="text-2xl font-heading font-medium mb-3 text-primary">Request Sent!</h4>
                       <p className="text-gray-500 font-light text-sm max-w-[250px]">
-                        We've received your request for the <strong className="font-semibold text-black">{selectedPlan?.name} Plan</strong>. We'll be in touch shortly.
+                        We've received your request for the <strong className="font-semibold text-primary">{selectedPlan?.name} Plan</strong>. We'll be in touch shortly.
                       </p>
                       <Button onClick={closeModal} className="mt-8 w-full">Close</Button>
                     </div>
@@ -220,7 +220,7 @@ const Pricing = () => {
                         <div className="mb-8">
                             <h3 className="text-2xl font-heading font-medium text-primary mb-2">Request Plan</h3>
                             <p className="text-gray-500 text-sm">
-                                You selected the <strong className="text-black">{selectedPlan?.name}</strong> at {selectedPlan?.price}. Provide your details below.
+                                You selected the <strong className="text-primary">{selectedPlan?.name}</strong> at {selectedPlan?.price}. Provide your details below.
                             </p>
                         </div>
                         
@@ -238,7 +238,7 @@ const Pricing = () => {
                                     type="text" 
                                     name="name"
                                     required
-                                    className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all"
+                                    className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-3 outline-none transition-all"
                                     placeholder="Your Name"
                                 />
                             </div>
@@ -249,7 +249,7 @@ const Pricing = () => {
                                     type="email" 
                                     name="email"
                                     required
-                                    className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all"
+                                    className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-3 outline-none transition-all"
                                     placeholder="your@email.com"
                                 />
                             </div>
@@ -260,7 +260,7 @@ const Pricing = () => {
                                     type="tel" 
                                     name="phone"
                                     required
-                                    className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all"
+                                    className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-3 outline-none transition-all"
                                     placeholder="+91 98765 43210"
                                 />
                             </div>
@@ -272,7 +272,7 @@ const Pricing = () => {
                                         name="project_requirements"
                                         required
                                         rows={3}
-                                        className="w-full bg-(--color-bg-base) border border-transparent focus:border-black/20 focus:bg-white rounded-xl px-4 py-3 outline-none transition-all resize-none"
+                                        className="w-full bg-bg-base border border-transparent focus:border-primary/20 focus:bg-surface rounded-xl px-4 py-3 outline-none transition-all resize-none"
                                         placeholder="Tell us exactly what you're looking to build..."
                                     />
                                 </div>
@@ -287,7 +287,7 @@ const Pricing = () => {
                             <button 
                                 type="submit" 
                                 disabled={isSubmitting}
-                                className="w-full mt-2 px-6 py-4 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition-colors disabled:opacity-70 flex justify-center items-center"
+                                className="w-full mt-2 px-6 py-4 bg-primary text-surface text-sm font-medium rounded-full hover:bg-primary/90 transition-colors disabled:opacity-70 flex justify-center items-center"
                             >
                                 {isSubmitting ? 'Sending Request...' : 'Submit Request'}
                             </button>

@@ -75,7 +75,7 @@ const CafeDemo = () => {
                 { name: "Pour Over", desc: "Hand-brewed filter coffee, rotating beans.", price: "$5.50", img: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
               ].map((item, idx) => (
                  <FadeUp key={idx} delay={idx * 0.1}>
-                    <div className="bg-white border border-[#EFEBE9] p-4 flex gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div className="bg-surface border border-[#EFEBE9] p-4 flex gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                        <img src={item.img} alt={item.name} className="w-24 h-24 object-cover" />
                        <div className="flex flex-col grow justify-center">
                           <div className="flex justify-between items-baseline mb-1">
