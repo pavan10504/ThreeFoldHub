@@ -143,21 +143,21 @@ const Pricing = () => {
              <FadeUp key={idx} delay={idx * 0.1}>
                 <div className={`h-full relative rounded-[2.5rem] p-10 flex flex-col border hover-lift transition-all duration-500 ${
                   plan.highlight 
-                  ? 'bg-primary text-surface border-primary shadow-2xl scale-105 z-10' 
-                  : 'bg-surface text-primary border-primary/10'
+                  ? 'bg-[#111] dark:bg-zinc-900 text-white border-[#222] dark:border-white/10 shadow-2xl scale-105 z-10' 
+                  : 'bg-surface text-primary border-primary/10 dark:border-white/10 dark:bg-zinc-900/40'
                 }`}>
                   {plan.highlight && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-surface px-4 py-1 text-sm font-medium rounded-full">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-white px-4 py-1 text-sm font-medium rounded-full">
                       Recommended
                     </div>
                   )}
                   
                   <div className="mb-8">
-                    <h3 className={`text-2xl font-heading font-medium mb-4 ${plan.highlight ? 'text-surface' : 'text-primary'}`}>{plan.name}</h3>
+                    <h3 className={`text-2xl font-heading font-medium mb-4 ${plan.highlight ? 'text-white' : 'text-primary'}`}>{plan.name}</h3>
                     <div className="flex items-baseline gap-2 mb-4">
                       <span className="text-4xl font-heading font-semibold">{plan.price}</span>
                     </div>
-                    <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-surface/70' : 'text-primary/60'}`}>
+                    <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-gray-400' : 'text-primary/60'}`}>
                       {plan.desc}
                     </p>
                   </div>
@@ -166,8 +166,8 @@ const Pricing = () => {
                     <ul className="flex flex-col gap-4">
                       {plan.features.map((feature, fIdx) => (
                         <li key={fIdx} className="flex items-start gap-3 text-sm">
-                          <Check className={`w-5 h-5 shrink-0 ${plan.highlight ? 'text-surface/80' : 'text-primary/70'}`} />
-                          <span className={plan.highlight ? 'text-surface/80' : 'text-primary/80'}>{feature}</span>
+                          <Check className={`w-5 h-5 shrink-0 ${plan.highlight ? 'text-white/80' : 'text-primary/70'}`} />
+                          <span className={plan.highlight ? 'text-gray-300' : 'text-primary/80'}>{feature}</span>
                         </li>
                       ))}
                     </ul>

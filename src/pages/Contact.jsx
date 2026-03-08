@@ -83,7 +83,7 @@ const Contact = () => {
             </FadeUp>
           </div>
 
-          <div className="bg-surface p-8 md:p-12 rounded-[2.5rem] border border-primary/5 shadow-xl shadow-primary/2">
+          <div className="bg-surface dark:bg-zinc-900/40 p-8 md:p-12 rounded-[2.5rem] border border-primary/5 dark:border-white/10 shadow-xl shadow-primary/2">
             <FadeUp delay={0.3}>
               <h3 className="text-2xl font-heading font-medium mb-8">Send us a message</h3>
               {isSubmitted ? (

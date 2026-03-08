@@ -60,7 +60,7 @@ const About = () => {
               "Premium handcrafted feel"
             ].map((reason, idx) => (
               <FadeUp key={idx} delay={idx * 0.1}>
-                <div className="p-8 bg-surface border border-primary/5 rounded-2xl hover-lift">
+                <div className="p-8 bg-surface dark:bg-zinc-900/40 border border-primary/5 dark:border-white/10 rounded-2xl hover-lift">
                   <div className="w-10 h-10 bg-black/5 flex items-center justify-center rounded-xl mb-6 text-primary font-medium">
                     0{idx + 1}
                   </div>
@@ -72,7 +72,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="py-32 bg-primary text-surface rounded-[3rem] mx-4 md:mx-12 my-12 text-center">
+      <section className="py-32 bg-[#111] dark:bg-zinc-900 text-white rounded-[3rem] mx-4 md:mx-12 my-12 text-center dark:border dark:border-white/5 shadow-xl">
         <div className="max-w-4xl mx-auto px-6">
           <FadeUp>
              <h2 className="text-4xl md:text-6xl font-heading font-medium tracking-tight mb-10 leading-tight">

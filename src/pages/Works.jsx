@@ -50,7 +50,7 @@ const Works = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {works.map((item, idx) => (
              <FadeUp key={idx} delay={idx * 0.1}>
-                <div className="group p-8 rounded-4xl border border-primary/5 hover:border-primary/10 hover-lift bg-surface relative overflow-hidden transition-all duration-300">
+                <div className="group p-8 rounded-4xl border border-primary/5 dark:border-white/10 hover:border-primary/10 dark:hover:border-white/20 hover-lift bg-surface dark:bg-zinc-900/40 relative overflow-hidden transition-all duration-300">
                    {/* Preview Image / Placeholder */}
                    <div className={`h-64 w-full flex items-center justify-center relative overflow-hidden rounded-2xl mb-6`}>
                       <img 

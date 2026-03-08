@@ -115,7 +115,7 @@ const Home = () => {
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none" />
                     
                     <div className="w-24 h-4 bg-accent/20 rounded-full relative z-10" />
-                    <div className="w-[80%] h-14 bg-primary rounded-xl relative z-10" />
+                    <div className="w-[80%] h-14 bg-gray-900 dark:bg-white/10 rounded-xl relative z-10" />
                     <div className="w-[60%] h-4 bg-gray-100 rounded-full relative z-10" />
                     
                     <div className="flex gap-4 mt-2 relative z-10">
@@ -159,11 +159,11 @@ const Home = () => {
                     x: { duration: 0.8, delay: 0.7, ease: "easeOut" },
                     y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.7 } 
                   }}
-                  className="absolute top-10 right-0 bg-primary p-4 rounded-2xl shadow-2xl shadow-primary/20 border border-[#222] z-30 w-36 aspect-square flex flex-col justify-between"
+                  className="absolute top-10 right-0 bg-[#111] dark:bg-zinc-900 p-4 rounded-2xl shadow-2xl shadow-black/50 border border-[#222] dark:border-white/10 z-30 w-36 aspect-square flex flex-col justify-between"
                 >
                   <div className="flex justify-between items-start">
-                    <div className="w-8 h-8 rounded-full bg-surface/10 flex items-center justify-center">
-                      <Monitor className="w-4 h-4 text-surface/50" />
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                      <Monitor className="w-4 h-4 text-white/50" />
                     </div>
                     <div className="flex gap-1.5 mt-1 relative z-10">
                       <div className="w-1.5 h-1.5 rounded-full bg-surface/20" />
@@ -217,7 +217,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, idx) => (
               <FadeUp key={idx} delay={idx * 0.1}>
-                <div className="group p-10 h-full rounded-4xl bg-bg-base border border-primary/5 hover:border-primary/10 hover-lift relative overflow-hidden transition-colors">
+                <div className="group p-10 h-full rounded-4xl bg-bg-base dark:bg-zinc-900/40 border border-primary/5 dark:border-white/10 hover:border-primary/10 dark:hover:border-white/20 hover-lift relative overflow-hidden transition-colors">
                   <div className="bg-surface w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-500 ease-out">
                     {service.icon}
                   </div>
@@ -274,7 +274,7 @@ const Home = () => {
       </section>
       
       {/* Ready CTA */}
-      <section className="py-32 bg-primary text-surface rounded-[3rem] mx-4 md:mx-12 my-12 relative overflow-hidden">
+      <section className="py-32 bg-[#111] dark:bg-zinc-900 text-white rounded-[3rem] mx-4 md:mx-12 my-12 relative overflow-hidden dark:border dark:border-white/5 shadow-2xl">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-[500px] bg-accent/20 blur-[150px] rounded-full pointer-events-none" />
         </div>
@@ -284,7 +284,7 @@ const Home = () => {
             <h2 className="text-5xl md:text-7xl font-heading font-medium tracking-tight mb-8">
               Ready to elevate your business?
             </h2>
-            <p className="text-xl text-surface/70 font-light mb-12">
+            <p className="text-xl text-gray-300 font-light mb-12">
               Let's create a digital experience that converts visitors into loyal customers.
             </p>
             <Button to="/contact" variant="secondary" className="border-none mt-4 hover:shadow-2xl">
