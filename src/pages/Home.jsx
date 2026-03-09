@@ -1,9 +1,9 @@
 import { useRef } from 'react';
-// eslint-disable-next-line no-unused-vars
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Monitor, Smartphone, Zap } from 'lucide-react';
 import FadeUp from '../components/ui/FadeUp';
 import Button from '../components/ui/Button';
+import { ShaderAnimation } from '../components/ui/ShaderAnimation';
 
 const Home = () => {
   const heroRef = useRef(null);
@@ -56,11 +56,12 @@ const Home = () => {
     <div className="w-full">
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Subtle Background Elements with Parallax */}
-        <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
-          <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] rounded-full bg-accent/5 blur-[120px]" />
-          <div className="absolute bottom-[10%] left-[5%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[150px]" />
-        </motion.div>
+        {/* Immersive Shader Background */}
+        <div className="absolute inset-0 z-0">
+          <ShaderAnimation />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-transparent to-bg-base opacity-60 dark:opacity-80 transition-opacity duration-700" />
+          <div className="absolute inset-0 bg-bg-base/20 transition-colors duration-700" />
+        </div>
 
         <div className="container mx-auto px-6 max-w-7xl relative z-10 pt-28 pb-20 flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2 max-w-2xl">
