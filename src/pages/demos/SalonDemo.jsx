@@ -98,12 +98,12 @@ const SalonDemo = () => {
                <p className="text-stone-500 font-light">A glimpse into our luxurious space and transformations.</p>
             </FadeUp>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                 {[
                   "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                   "https://images.unsplash.com/photo-1595475884562-073c30d45670?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                   "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                  "https://images.unsplash.com/photo-1521590832167-7bfcfaa6362f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  
                 ].map((img, idx) => (
                    <FadeUp key={idx} delay={idx * 0.1} className="h-full w-full">
                        <div className="aspect-square overflow-hidden group rounded-sm shadow-stone-200 shadow-xl border border-stone-200">

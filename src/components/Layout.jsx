@@ -1,16 +1,20 @@
+import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CookieBanner from './CookieBanner';
 
 const Layout = ({ children }) => {
+  const location = useLocation();
+  const isDemoPage = location.pathname.startsWith('/demo/');
+
   return (
     <div className="flex flex-col min-h-screen relative">
-      <Navbar />
-      <main className="grow pt-24 pb-12">
+      {!isDemoPage && <Navbar />}
+      <main className={`grow ${!isDemoPage ? 'pt-24 pb-12' : ''}`}>
         {children}
       </main>
-      <CookieBanner />
-      <Footer />
+      {!isDemoPage && <CookieBanner />}
+      {!isDemoPage && <Footer />}
     </div>
   );
 };

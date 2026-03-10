@@ -52,6 +52,21 @@ function DynamicSEO() {
     metaDescription.content = description;
   }, [pathname]);
 
+  // Handle Theme Override for Demos
+  useEffect(() => {
+    const isDemoPage = pathname.startsWith('/demo/');
+    if (isDemoPage) {
+      document.documentElement.classList.remove('dark');
+    } else {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, [pathname]);
+
   return null;
 }
 

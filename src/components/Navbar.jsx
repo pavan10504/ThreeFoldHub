@@ -16,15 +16,21 @@ const Navbar = () => {
     return false;
   });
 
+  const isDemoPage = location.pathname.startsWith('/demo/');
+
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
+    if (isDemoPage) {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+    } else {
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
     }
-  }, [isDarkMode]);
+  }, [isDarkMode, isDemoPage]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -83,13 +89,15 @@ const Navbar = () => {
               />
             </Link>
           ))}
-          <button 
-            onClick={toggleTheme} 
-            className="text-gray-500 hover:text-primary transition-colors hover-lift ml-2"
-            aria-label="Toggle Dark Mode"
-          >
-            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          {!isDemoPage && (
+            <button 
+              onClick={toggleTheme} 
+              className="text-gray-500 hover:text-primary transition-colors hover-lift ml-2"
+              aria-label="Toggle Dark Mode"
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+          )}
           <Link
             to="/contact"
             className="ml-4 px-6 py-2.5 bg-primary text-surface text-sm font-medium rounded-full hover:bg-primary/90 transition-colors hover-lift"
@@ -100,12 +108,14 @@ const Navbar = () => {
 
         {/* Mobile Nav Toggle & Theme */}
         <div className="md:hidden flex items-center gap-4 relative z-50">
-          <button 
-            onClick={toggleTheme} 
-            className="text-gray-500 hover:text-primary transition-colors"
-          >
-            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          {!isDemoPage && (
+            <button 
+              onClick={toggleTheme} 
+              className="text-gray-500 hover:text-primary transition-colors"
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+          )}
           <button
             className="p-2 -mr-2 text-primary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
