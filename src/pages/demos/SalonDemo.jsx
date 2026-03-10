@@ -38,7 +38,10 @@ const SalonDemo = () => {
                     <Button className="bg-stone-900 text-stone-50 hover:bg-stone-800 rounded-none px-8 py-4 font-light tracking-widest uppercase text-sm">
                       Book Appointment
                     </Button>
-                    <Button className="bg-surface/90 backdrop-blur border border-stone-200 text-stone-900 hover:bg-surface rounded-none px-8 py-4 tracking-widest uppercase text-sm font-medium shadow-sm">
+                    <Button 
+                      variant="secondary"
+                      className="bg-surface/90 backdrop-blur border border-stone-200 text-stone-900 hover:bg-surface rounded-none px-8 py-4 tracking-widest uppercase text-sm font-medium shadow-sm"
+                    >
                       View Services
                     </Button>
                  </div>
@@ -98,7 +101,7 @@ const SalonDemo = () => {
                <p className="text-stone-500 font-light">A glimpse into our luxurious space and transformations.</p>
             </FadeUp>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {[
                   "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                   "https://images.unsplash.com/photo-1595475884562-073c30d45670?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
