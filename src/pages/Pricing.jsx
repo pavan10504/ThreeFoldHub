@@ -14,26 +14,29 @@ const Pricing = () => {
     {
       name: "Basic",
       price: "₹9,999",
-      desc: "Perfect for a simple, professional single-page presence.",
+      desc: "Perfect for a simple, professional Build.",
       features: [
-        "Landing Page",
-        "Mobile responsive",
-        "Services, Contact, Location",
-        "Basic SEO, Optimised",
+        "1-3 Pages - Home, About, Contact",
+        "Fast Pagespeed & Mobile responsive",
+        "WhatsApp + Call button, Google Maps",
+        "SEO optimisation - Google, Gemini",
+        "Custom Design - Your brand, Your colours",
         "3-5 Days Delivery"
       ],
       highlight: false
     },
     {
       name: "Professional",
-      price: "₹22,499",
+      price: "₹24,999",
       desc: "Best for growing businesses needing a strong multi-page presence.",
       features: [
-        "Up to 6-7 pages",
-        "Premium Design and Animations",
-        "Custom Blog page",
-        "Mobile responsive & SEO",
-        "Fast Delivery"
+        "6-9 pages including Home, About, Contact",
+        "Blog Setup & SEO optimized posts",
+        "Custom Form and Email ALerts - Leads delivered to inbox",
+        "All Device optimized  & Advanced SEO",
+        "Brand Design - Professional identity",
+        "1 Round of revisions",
+        "7-10 Days Delivery"
       ],
       highlight: true
     },
@@ -42,11 +45,13 @@ const Pricing = () => {
       price: "₹44,999",
       desc: "Ideal for businesses that want a fully loaded digital experience.",
       features: [
-        "Everything in Professional",
-        "Chatbot Integration",
-        "CMS setup for Blogs",
-        "Advanced SEO & Analytics",
-        "Priority Support"
+        "10-15 pages - Comprehensive coverage of every service",
+        "Product/Service Gallery",
+        "Competitor Keyword Research",
+        "Advanced Schema Markup for Google",
+        "Newsletter Setup & Vedio Section",
+        "3 Rounds of revisions",
+        "Google Analytics setup & Search Console"
       ],
       highlight: false
     },
@@ -59,7 +64,7 @@ const Pricing = () => {
         "Advanced Integrations",
         "Dedicated Team",
         "E-commerce capabilities",
-        "Ongoing Maintenance"
+        "Ongoing Maintenance",
       ],
       highlight: false
     }
