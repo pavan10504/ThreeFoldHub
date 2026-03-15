@@ -27,7 +27,7 @@ const Pricing = () => {
     },
     {
       name: "Professional",
-      price: "₹24,999",
+      price: "₹29,999",
       desc: "Best for growing businesses needing a strong multi-page presence.",
       features: [
         "6-9 pages including Home, About, Contact",
@@ -42,7 +42,7 @@ const Pricing = () => {
     },
     {
       name: "Enterprise",
-      price: "₹44,999",
+      price: "₹59,999",
       desc: "Ideal for businesses that want a fully loaded digital experience.",
       features: [
         "10-15 pages - Comprehensive coverage of every service",
