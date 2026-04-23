@@ -1,22 +1,18 @@
 import { jsPDF } from 'jspdf';
 import DocBuilder from '../../components/tools/DocBuilder';
-import { addHeader, addSection, addParagraph, addBulletList, addFooter, addSignatureBlock } from '../../utils/pdfGenerator';
+import { addHeader, addSection, addParagraph, addBulletList, addFooter, addSignatureBlock, checkAndAddPage, PAGE_HEIGHT, MARGIN, CONTENT_WIDTH } from '../../utils/pdfGenerator';
 
 const defaultValues = {
   agencyName: 'ThreeFoldHub',
-  agencyAddress: 'Mumbai, Maharashtra, India',
-  agencyEmail: 'hello@threefoldhub.in',
   clientName: '',
   clientCompany: '',
-  clientAddress: '',
-  clientEmail: '',
   projectDescription: '',
   totalFee: '',
   depositPercent: '50',
   paymentStages: 'deposit,design-approval,launch',
   revisionRounds: '3',
   killFeePercent: '30',
-  governingState: 'Maharashtra',
+  governingState: 'Karnataka',
   startDate: '',
   duration: '',
 };
@@ -29,7 +25,7 @@ const fields = [
   { name: 'clientCompany', label: 'Client Company Name', type: 'text', required: true },
   { name: 'clientAddress', label: 'Client Address', type: 'text' },
   { name: 'clientEmail', label: 'Client Email', type: 'email', required: true },
-  { name: 'projectDescription', label: 'Project Description', type: 'textarea', rows: 4, required: true, placeholder: 'Describe the web design project, deliverables, and goals...' },
+  { name: 'projectDescription', label: 'Project Description', type: 'textarea', rows: 4, required: true, placeholder: 'Describe the web design project...' },
   { name: 'totalFee', label: 'Total Project Fee', type: 'text', required: true, placeholder: 'e.g., $5,000' },
   { name: 'depositPercent', label: 'Deposit Percentage', type: 'select', options: [
     { value: '30', label: '30%' },
@@ -48,34 +44,42 @@ const fields = [
     { value: '30', label: '30%' },
     { value: '50', label: '50%' },
   ]},
-  { name: 'governingState', label: 'Governing Jurisdiction', type: 'text', placeholder: 'e.g., Maharashtra, India' },
+  { name: 'governingState', label: 'Governing Jurisdiction', type: 'text', placeholder: 'e.g., Karnataka' },
 ];
 
 const generatePDF = (data) => {
-  const doc = new jsPDF();
+  const doc = new jsPDF({
+    orientation: 'portrait',
+    unit: 'mm',
+    format: 'a4',
+  });
   
-  addHeader(doc, 'Web Design Services Agreement', `${data.projectDescription?.substring(0, 50) || 'Project'}...`);
+  const desc = data.projectDescription ? data.projectDescription.substring(0, 50) : 'Project';
+  addHeader(doc, 'Web Design Services Agreement', desc + '...');
   
   let y = 50;
   
   y = addSection(doc, '1. Parties', y);
-  addBulletList(doc, [
-    `Agency: ${data.agencyName || 'ThreeFoldHub'} ("Designer")`,
-    `Address: ${data.agencyAddress || 'Mumbai, Maharashtra, India'}`,
-    `Email: ${data.agencyEmail || 'hello@threefoldhub.in'}`,
+  y = addBulletList(doc, [
+    'Agency: ' + (data.agencyName || 'ThreeFoldHub'),
+    'Address: ' + (data.agencyAddress || 'Mumbai, Karnataka'),
+    'Email: ' + (data.agencyEmail || 'hello@threefoldhub.in'),
     '',
-    `Client: ${data.clientName || '[Client Name]'}`,
-    `Company: ${data.clientCompany || '[Company Name]'}`,
-    `Address: ${data.clientAddress || '[Address]'}`,
-    `Email: ${data.clientEmail || '[Email]'}`,
+    'Client: ' + (data.clientName || '[Client Name]'),
+    'Company: ' + (data.clientCompany || '[Company Name]'),
+    'Address: ' + (data.clientAddress || '[Address]'),
+    'Email: ' + (data.clientEmail || '[Email]'),
   ], y);
-  y += 15;
   
+  y += 5;
+  y = checkAndAddPage(doc, y, 50);
   y = addSection(doc, '2. Project Overview', y);
-  y = addParagraph(doc, data.projectDescription || 'This Agreement is for web design and development services as discussed between the parties.', y);
-  y = addParagraph(doc, `Start Date: ${data.startDate || '[Start Date]'} | Duration: ${data.duration || 'TBD'}`, y, 9);
+  y = addParagraph(doc, data.projectDescription || 'This Agreement is for web design and development services.', y);
+  const startInfo = 'Start Date: ' + (data.startDate || '[Start Date]') + ' | Duration: ' + (data.duration || 'TBD');
+  y = addParagraph(doc, startInfo, y, 9);
   y += 5;
   
+  y = checkAndAddPage(doc, y, 80);
   y = addSection(doc, '3. Scope of Services', y);
   const deliverables = [
     'Custom website design as per agreed specifications',
@@ -84,9 +88,10 @@ const generatePDF = (data) => {
     'Contact forms and essential functionality',
     'Final delivery of source code and credentials',
   ];
-  addBulletList(doc, deliverables, y);
-  y += 15;
+  y = addBulletList(doc, deliverables, y);
+  y += 5;
   
+  y = checkAndAddPage(doc, y, 50);
   y = addSection(doc, '4. Exclusions', y);
   const exclusions = [
     'Content writing and copywriting',
@@ -95,102 +100,141 @@ const generatePDF = (data) => {
     'Ongoing maintenance and hosting (unless specified)',
     'Third-party plugin costs',
   ];
-  addBulletList(doc, exclusions, y);
-  y += 15;
+  y = addBulletList(doc, exclusions, y);
+  y += 5;
   
+  y = checkAndAddPage(doc, y, 60);
   y = addSection(doc, '5. Fees and Payment Terms', y);
-  addParagraph(doc, `Total Project Fee: ${data.totalFee || '[Amount]'}`, y, 12);
-  y += 8;
-  addBulletList(doc, [
-    `Deposit (${data.depositPercent || '50'}%): Due upon signing this agreement`,
+  const feeText = 'Total Project Fee: ' + (data.totalFee || '[Amount]');
+  y = addParagraph(doc, feeText, y, 12);
+  y += 3;
+  y = addBulletList(doc, [
+    'Deposit (' + (data.depositPercent || '50') + '%): Due upon signing',
     'Milestone Payment: Due upon design approval',
     'Final Payment: Due before website launch',
-    'Late Payment: 1.5% interest per month on overdue balances',
+    'Late Payment: 1.5% interest per month',
     'Work will commence only after deposit is received',
   ], y);
-  y += 15;
   
+  y = checkAndAddPage(doc, y, 50);
   y = addSection(doc, '6. Revisions', y);
-  addParagraph(doc, `This agreement includes ${data.revisionRounds || '3'} rounds of revisions at each major milestone. Additional revisions will be charged at the standard hourly rate of $75/hour.`, y);
-  y += 10;
-  addParagraph(doc, 'Revisions are defined as changes to existing approved designs. New features or significant scope changes require a separate change order.', y);
-  y += 10;
+  const revisionText = 'This agreement includes ' + (data.revisionRounds || '3') + ' rounds of revisions. Additional revisions will be charged at $75/hour.';
+  y = addParagraph(doc, revisionText, y);
+  y += 3;
+  y = addParagraph(doc, 'Revisions are defined as changes to existing approved designs. New features require a separate change order.', y);
   
+  y = checkAndAddPage(doc, y, 50);
   y = addSection(doc, '7. Intellectual Property', y);
   const ipTerms = [
-    'Upon full payment, Client receives ownership of final website deliverables',
-    'Designer retains ownership of design source files, frameworks, and tools',
-    'Designer may display completed work in portfolio unless agreed otherwise',
-    'Client retains ownership of all content, images, and materials provided',
+    'Upon full payment, Client receives ownership of deliverables',
+    'Designer retains ownership of design source files and tools',
+    'Designer may display completed work in portfolio',
+    'Client retains ownership of content and materials provided',
   ];
-  addBulletList(doc, ipTerms, y);
-  y += 15;
+  y = addBulletList(doc, ipTerms, y);
   
+  y = checkAndAddPage(doc, y, 40);
   y = addSection(doc, '8. Confidentiality', y);
-  addParagraph(doc, 'Both parties agree to keep confidential any proprietary information, trade secrets, or business processes disclosed during this engagement. This obligation survives termination of this Agreement.', y);
-  y += 10;
+  y = addParagraph(doc, 'Both parties agree to keep confidential any proprietary information, trade secrets, or business processes disclosed during this engagement.', y);
   
+  y = checkAndAddPage(doc, y, 50);
   y = addSection(doc, '9. Termination', y);
-  const terminationTerms = [
+  y = addBulletList(doc, [
     'Either party may terminate with 14 days written notice',
-    'Upon termination, Client pays for all work completed plus applicable kill fee',
-    `Kill Fee: ${data.killFeePercent || '30'}% of remaining project value`,
-    'Designer delivers all completed work upon full payment',
-  ];
-  addBulletList(doc, terminationTerms, y);
-  y += 15;
+    'Client pays for work completed plus kill fee',
+    'Kill Fee: ' + (data.killFeePercent || '30') + '% of remaining value',
+    'Designer delivers completed work upon full payment',
+  ], y);
   
+  y = checkAndAddPage(doc, y, 40);
   y = addSection(doc, '10. Limitation of Liability', y);
-  addParagraph(doc, "Designer's liability is limited to the total fees paid under this Agreement. Designer is not liable for indirect, incidental, or consequential damages.", y);
-  y += 10;
+  y = addParagraph(doc, "Designer's liability is limited to total fees paid. Designer is not liable for indirect, incidental, or consequential damages.", y);
   
+  y = checkAndAddPage(doc, y, 50);
   y = addSection(doc, '11. Governing Law', y);
-  addParagraph(doc, `This Agreement shall be governed by the laws of ${data.governingState || 'Maharashtra, India'}. Any disputes shall be resolved through mediation before legal action.`, y);
+  const govText = 'This Agreement shall be governed by the laws of ' + (data.governingState || 'Karnataka') + '.';
+  y = addParagraph(doc, govText, y);
+  
   y += 15;
+  y = checkAndAddPage(doc, y, 50);
+  y = addSignatureBlock(doc, y, 'Client', 'Designer');
   
-  addSignatureBlock(doc, y, 'Client', 'Designer');
+  addFooter(doc, 'ThreeFoldHub Services Agreement');
   
-  addFooter(doc);
-  
-  doc.save(`agreement-${(data.clientName || 'client').toLowerCase().replace(/\s+/g, '-')}.pdf`);
+  const filename = 'agreement-' + (data.clientName || 'client').toLowerCase().replace(/\s+/g, '-') + '.pdf';
+  doc.save(filename);
 };
 
 const previewContent = (data) => (
-  <div className="bg-white rounded-lg p-6 text-sm font-sans">
-    <div className="bg-gray-100 h-10 rounded flex items-center px-4 mb-4">
-      <div className="w-3 h-3 rounded-full bg-red-400 mr-2" />
-      <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
-      <div className="w-3 h-3 rounded-full bg-green-400" />
+  <div className="p-4 text-xs leading-relaxed" style={{minWidth: '595px'}}>
+    <div className="flex items-center gap-3 mb-4 pb-3 border-b-2 border-red-500">
+      <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center text-white font-bold text-sm">
+        TFH
+      </div>
+      <div>
+        <h1 className="text-base font-bold">Web Design Services Agreement</h1>
+        <p className="text-gray-500 text-xs">{data.projectDescription ? data.projectDescription.substring(0, 40) + '...' : 'Project'}</p>
+      </div>
     </div>
     
-    <h1 className="text-xl font-bold mb-1">Web Design Agreement</h1>
-    <p className="text-gray-500 mb-4">Between {data.agencyName || 'Agency'} & {data.clientName || '[Client]'}</p>
-    
-    <div className="text-xs space-y-3">
-      <div>
-        <h2 className="font-bold text-red-500">1. PARTIES</h2>
-        <p className="text-gray-600">Designer: {data.agencyName || 'Agency'}</p>
-        <p className="text-gray-600">Client: {data.clientName || '[Client]'}</p>
-      </div>
-      
-      <div>
-        <h2 className="font-bold text-red-500">2. PROJECT FEE</h2>
-        <p className="text-gray-600 text-lg font-bold">{data.totalFee || '$0'}</p>
-        <p className="text-gray-500">Deposit: {data.depositPercent || '50'}%</p>
-      </div>
-      
-      <div>
-        <h2 className="font-bold text-red-500">3. KEY TERMS</h2>
-        <p className="text-gray-600">Revisions: {data.revisionRounds || '3'} rounds</p>
-        <p className="text-gray-600">Kill Fee: {data.killFeePercent || '30'}%</p>
-      </div>
-      
-      <div className="pt-4 border-t">
-        <div className="flex justify-between text-gray-400">
-          <span>Client Signature</span>
-          <span>Date</span>
+    <div className="space-y-4">
+      <section>
+        <h2 className="text-red-500 font-bold text-xs mb-2">1. PARTIES</h2>
+        <div className="grid grid-cols-2 gap-4 text-gray-700">
+          <div>
+            <p className="font-semibold">Agency</p>
+            <p>{data.agencyName || 'ThreeFoldHub'}</p>
+            <p className="text-gray-500">{data.agencyEmail || 'hello@threefoldhub.in'}</p>
+          </div>
+          <div>
+            <p className="font-semibold">Client</p>
+            <p>{data.clientName || '[Client Name]'}</p>
+            <p className="text-gray-500">{data.clientCompany || '[Company]'}</p>
+          </div>
         </div>
-      </div>
+      </section>
+      
+      <section>
+        <h2 className="text-red-500 font-bold text-xs mb-2">2. FEES</h2>
+        <p className="text-lg font-bold">Total: {data.totalFee || '$0'}</p>
+        <p className="text-gray-500">Deposit: {data.depositPercent || '50'}%</p>
+      </section>
+      
+      <section>
+        <h2 className="text-red-500 font-bold text-xs mb-2">3. KEY TERMS</h2>
+        <div className="grid grid-cols-2 gap-2 text-gray-700">
+          <p>Revisions: {data.revisionRounds || '3'} rounds</p>
+          <p>Kill Fee: {data.killFeePercent || '30'}%</p>
+          <p>Start: {data.startDate || '[Date]'}</p>
+          <p>Duration: {data.duration || 'TBD'}</p>
+        </div>
+      </section>
+      
+      <section>
+        <h2 className="text-red-500 font-bold text-xs mb-2">4. SCOPE</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>Custom website design</li>
+          <li>Responsive development</li>
+          <li>Basic SEO optimization</li>
+          <li>Contact forms</li>
+        </ul>
+      </section>
+      
+      <section>
+        <h2 className="text-red-500 font-bold text-xs mb-2">5. SIGNATURES</h2>
+        <div className="grid grid-cols-2 gap-8 mt-4 pt-4 border-t">
+          <div>
+            <div className="border-b border-gray-300 w-32 mb-2"></div>
+            <p className="text-gray-500 text-xs">Client Signature</p>
+            <p className="text-gray-500 text-xs">Date: ___________</p>
+          </div>
+          <div>
+            <div className="border-b border-gray-300 w-32 mb-2"></div>
+            <p className="text-gray-500 text-xs">Agency Signature</p>
+            <p className="text-gray-500 text-xs">Date: ___________</p>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 );

@@ -48,7 +48,7 @@ const DocBuilder = ({
                 </button>
               </div>
 
-              <div className="space-y-6 bg-surface p-6 md:p-8 rounded-2xl border border-primary/5">
+              <div className="space-y-6 bg-surface p-6 md:p-8 rounded-2xl border border-primary/5 overflow-y-auto max-h-[calc(100vh-300px)]">
                 {fields.map((field) => (
                   <FormField 
                     key={field.name}
@@ -71,15 +71,28 @@ const DocBuilder = ({
             </div>
           </FadeUp>
 
-          <FadeUp delay={0.2} className="hidden lg:block">
-            <div className="sticky top-24">
-              <h2 className="text-lg font-heading font-medium mb-4">Preview</h2>
-              <div className="bg-bg-tert rounded-2xl p-4 md:p-8 min-h-[600px] pdf-preview">
-                {previewContent ? previewContent(formData) : (
-                  <div className="flex items-center justify-center h-full text-primary/30">
-                    <p>Fill the form to see preview</p>
+          <FadeUp delay={0.2}>
+            <div className="lg:sticky lg:top-24">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-heading font-medium">Preview</h2>
+                <span className="text-xs text-primary/40">A4 Document</span>
+              </div>
+              <div className="bg-bg-tert rounded-2xl p-3 md:p-4 min-h-[600px] overflow-auto">
+                <div className="bg-white rounded-lg shadow-lg">
+                  <div className="sticky top-0 bg-[#f8f7f4] border-b border-gray-200 rounded-t-lg px-4 py-2 flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-400" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                    <div className="w-3 h-3 rounded-full bg-green-400" />
+                    <div className="flex-1 mx-4 h-5 bg-white border border-gray-200 rounded-md" />
                   </div>
-                )}
+                  <div className="p-6 max-h-[600px] overflow-auto" style={{minHeight: '600px'}}>
+                    {previewContent ? previewContent(formData) : (
+                      <div className="flex items-center justify-center h-full text-primary/30">
+                        <p>Fill the form to see preview</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </FadeUp>

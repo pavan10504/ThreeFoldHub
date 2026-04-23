@@ -9,10 +9,11 @@ export const COLORS = {
   border: [220, 220, 220],
 };
 
-export const FONTS = {
-  heading: 'helvetica',
-  body: 'helvetica',
-};
+export const MM_TO_PT = 2.8346;
+export const PAGE_HEIGHT = 297; // A4 height in mm
+export const PAGE_WIDTH = 210; // A4 width in mm
+export const MARGIN = 15;
+export const CONTENT_WIDTH = PAGE_WIDTH - (MARGIN * 2);
 
 export const setDocumentStyles = (doc, isDark = false) => {
   if (isDark) {
@@ -22,128 +23,200 @@ export const setDocumentStyles = (doc, isDark = false) => {
   }
 };
 
-export const addHeader = (doc, title, subtitle = '', accentColor = COLORS.accent) => {
+export const addHeader = (doc, title, subtitle) => {
   const pageWidth = doc.internal.pageSize.getWidth();
   
-  doc.setFillColor(...COLORS.lightGray);
-  doc.rect(0, 0, pageWidth, 40, 'F');
+  // Skip header if not on first page or add to all pages
+  doc.setFillColor(245, 245, 245);
+  doc.rect(0, 0, pageWidth, 35, 'F');
   
-  doc.setFillColor(...accentColor);
-  doc.rect(0, 0, 4, 40, 'F');
+  doc.setFillColor(230, 57, 70);
+  doc.rect(0, 0, 4, 35, 'F');
   
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(20);
-  doc.setTextColor(...COLORS.primary);
-  doc.text(title, 15, 25);
+  doc.setFontSize(18);
+  doc.setTextColor(17, 17, 17);
+  doc.text(title, MARGIN, 22);
   
   if (subtitle) {
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(...COLORS.gray);
-    doc.text(subtitle, 15, 33);
+    doc.setFontSize(9);
+    doc.setTextColor(128, 128, 128);
+    doc.text(subtitle, MARGIN, 30);
   }
 };
 
-export const addSection = (doc, title, y) => {
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(12);
-  doc.setTextColor(...COLORS.accent);
-  doc.text(title.toUpperCase(), 15, y);
+export const addSection = (doc, title, y, addNewPageIfNeeded = true) => {
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const bottomMargin = pageHeight - 20;
   
-  doc.setDrawColor(...COLORS.border);
-  doc.setLineWidth(0.5);
-  doc.line(15, y + 2, 195, y + 2);
+  if (y > bottomMargin - 20 && addNewPageIfNeeded) {
+    doc.addPage();
+    return MARGIN + 15;
+  }
+  
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(230, 57, 70);
+  doc.text(title.toUpperCase(), MARGIN, y);
+  
+  doc.setDrawColor(220, 220, 220);
+  doc.setLineWidth(0.3);
+  doc.line(MARGIN, y + 3, CONTENT_WIDTH + MARGIN, y + 3);
   
   return y + 10;
 };
 
-export const addParagraph = (doc, text, y, fontSize = 10, maxWidth = 175) => {
+export const addParagraph = (doc, text, y, fontSize = 10, maxWidth = CONTENT_WIDTH, addNewPageIfNeeded = true) => {
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const bottomMargin = pageHeight - 20;
+  
+  if (!text) {
+    return y + 10;
+  }
+  
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(fontSize);
-  doc.setTextColor(...COLORS.primary);
+  doc.setTextColor(17, 17, 17);
   
-  const lines = doc.splitTextToSize(text, maxWidth);
-  doc.text(lines, 15, y);
+  const str = String(text);
+  const lines = doc.splitTextToSize(str, maxWidth);
+  const lineHeight = fontSize * 0.45 + 2;
+  const totalHeight = lines.length * lineHeight;
   
-  return y + (lines.length * fontSize * 0.4) + 5;
+  if (y + totalHeight > bottomMargin && addNewPageIfNeeded) {
+    doc.addPage();
+    y = MARGIN + 10;
+  }
+  
+  doc.text(str, MARGIN, y);
+  
+  return y + totalHeight + 3;
 };
 
-export const addBulletList = (doc, items, y, maxWidth = 175) => {
+export const addBulletList = (doc, items, y, maxWidth = CONTENT_WIDTH, addNewPageIfNeeded = true) => {
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const bottomMargin = pageHeight - 20;
+  
+  if (!items || !Array.isArray(items)) {
+    return y;
+  }
+  
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
-  doc.setTextColor(...COLORS.primary);
+  doc.setTextColor(17, 17, 17);
   
-  items.forEach((item, idx) => {
-    const bullet = '•';
-    doc.text(bullet, 18, y + (idx * 6));
+  items.forEach((item) => {
+    if (!item) return;
     
-    const lines = doc.splitTextToSize(item, maxWidth - 10);
-    doc.text(lines, 25, y + (idx * 6));
+    const str = String(item);
+    
+    if (y > bottomMargin - 10 && addNewPageIfNeeded) {
+      doc.addPage();
+      y = MARGIN + 10;
+    }
+    
+    doc.text('•', MARGIN + 3, y);
+    doc.text(str, MARGIN + 10, y);
+    
+    y += 8;
   });
   
-  return y + (items.length * 6) + 5;
+  return y + 5;
 };
 
-export const addTable = (doc, headers, data, y) => {
+export const addTable = (doc, headers, data, y, addNewPageIfNeeded = true) => {
   autoTable(doc, {
     head: [headers],
     body: data,
     startY: y,
-    margin: { left: 15, right: 15 },
+    margin: { left: MARGIN, right: MARGIN },
     styles: {
       fontSize: 9,
       cellPadding: 4,
     },
     headStyles: {
-      fillColor: COLORS.primary,
+      fillColor: [17, 17, 17],
       textColor: [255, 255, 255],
       fontStyle: 'bold',
     },
     alternateRowStyles: {
-      fillColor: COLORS.lightGray,
+      fillColor: [245, 245, 245],
     },
+    pageBreak: addNewPageIfNeeded ? 'auto' : 'avoid',
   });
   
   return doc.lastAutoTable.finalY + 10;
 };
 
-export const addFooter = (doc, text = 'Generated by ThreeFoldHub Tools') => {
+export const addFooter = (doc, text, pageCount) => {
   const pageHeight = doc.internal.pageSize.getHeight();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const totalPages = doc.internal.getNumberOfPages();
   
   doc.setFontSize(8);
-  doc.setTextColor(...COLORS.gray);
-  doc.text(text, 105, pageHeight - 10, { align: 'center' });
-  doc.text(`Page 1`, 185, pageHeight - 10);
+  doc.setTextColor(180, 180, 180);
+  const footerText = text || 'Generated by ThreeFoldHub Tools';
+  doc.text(footerText, pageWidth / 2, pageHeight - 10, { align: 'center' });
+  doc.text('Page ' + (pageCount || totalPages), pageWidth - MARGIN, pageHeight - 10);
 };
 
-export const addSignatureBlock = (doc, y, leftLabel = 'Client', rightLabel = 'ThreeFoldHub') => {
+export const addSignatureBlock = (doc, y, leftLabel, rightLabel, addNewPageIfNeeded = true) => {
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const bottomMargin = pageHeight - 20;
   const lineHeight = 25;
+  
+  if (y + lineHeight + 20 > bottomMargin && addNewPageIfNeeded) {
+    doc.addPage();
+    y = MARGIN + 10;
+  }
+  
   const labelY = y;
   
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10);
-  doc.setTextColor(...COLORS.primary);
-  doc.text(leftLabel, 15, labelY);
+  doc.setTextColor(17, 17, 17);
+  doc.text(leftLabel, MARGIN, labelY);
   doc.text(rightLabel, 130, labelY);
   
-  doc.setDrawColor(...COLORS.primary);
-  doc.setLineWidth(0.5);
-  doc.line(15, labelY + lineHeight, 90, labelY + lineHeight);
+  doc.setDrawColor(100, 100, 100);
+  doc.setLineWidth(0.3);
+  doc.line(MARGIN, labelY + lineHeight, 90, labelY + lineHeight);
   doc.line(130, labelY + lineHeight, 195, labelY + lineHeight);
   
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
-  doc.setTextColor(...COLORS.gray);
-  doc.text('Signature', 45, labelY + lineHeight + 8);
-  doc.text('Signature', 160, labelY + lineHeight + 8);
+  doc.setTextColor(128, 128, 128);
+  doc.text('Signature', 45, labelY + lineHeight + 6);
+  doc.text('Signature', 160, labelY + lineHeight + 6);
   
-  doc.line(15, labelY + lineHeight + 15, 90, labelY + lineHeight + 15);
-  doc.line(130, labelY + lineHeight + 15, 195, labelY + lineHeight + 15);
+  doc.line(MARGIN, labelY + lineHeight + 12, 90, labelY + lineHeight + 12);
+  doc.line(130, labelY + lineHeight + 12, 195, labelY + lineHeight + 12);
   
-  doc.text('Date', 45, labelY + lineHeight + 23);
-  doc.text('Date', 160, labelY + lineHeight + 23);
+  doc.text('Date', 45, labelY + lineHeight + 18);
+  doc.text('Date', 160, labelY + lineHeight + 18);
   
   return y + lineHeight + 30;
+};
+
+export const checkAndAddPage = (doc, y, needed = 30, headerTitle = '') => {
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const bottomMargin = pageHeight - 25;
+  
+  if (y + needed > bottomMargin) {
+    doc.addPage();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    doc.setFillColor(245, 245, 245);
+    doc.rect(0, 0, pageWidth, 20, 'F');
+    if (headerTitle) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(128, 128, 128);
+      doc.text(headerTitle, MARGIN, 13);
+    }
+    return MARGIN + 10;
+  }
+  return y;
 };
 
 export const generateDocument = (title, contentFn, filename) => {
@@ -160,6 +233,11 @@ export const generateDocument = (title, contentFn, filename) => {
 
 export default {
   COLORS,
+  MM_TO_PT,
+  PAGE_HEIGHT,
+  PAGE_WIDTH,
+  MARGIN,
+  CONTENT_WIDTH,
   setDocumentStyles,
   addHeader,
   addSection,
@@ -168,5 +246,6 @@ export default {
   addTable,
   addFooter,
   addSignatureBlock,
+  checkAndAddPage,
   generateDocument,
 };
